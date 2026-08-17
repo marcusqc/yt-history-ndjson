@@ -1,23 +1,37 @@
 # yt-history-ndjson
 
-A standalone DevTools browser script designed to stream and export your full YouTube watch history from **Google My Activity** into **NDJSON (.jsonl)** format with zero memory leaks and strict deduplication.
+Stand-alone DevTools script to export full YouTube watch history to NDJSON (.jsonl) with zero memory leaks.
 
-## 🚀 Features
+> **Note:** If this tool helped you backup your data, please give it a ⭐️!
 
-* **NDJSON Streaming:** Streams data into auto-downloaded `.jsonl` files every 250 items to keep memory footprint minimal.
-* **Strict Deduplication:** Extracts unique 11-character YouTube video IDs (`videoId`) ensuring **0 duplicates** across exported files.
-* **Zero-Leak RAM Engine:** Employs the `stripMediaAndClean` engine to destroy heavy media elements (`img`, `svg`, `canvas`, `video`) and empty processed DOM nodes in real time. Works smoothly even on low-spec/low-RAM PCs.
-* **Anti-Blocking Auto-Clicker:** Emulates physical pointer events (`pointerdown`, `mouseup`) alongside micro-scrolling to pass Google's "Load More" prompts and anti-bot pauses automatically.
+---
 
-## 📦 Data Schema
+## 💡 Why this instead of Google Takeout?
 
-Each line in the output `.jsonl` files contains a valid JSON object formatted as follows:
+Google Takeout can be slow, fail on large accounts, or deliver formats difficult to parse. This script streams data instantly from your browser with zero RAM leaks.
+
+---
+
+## 🛠️ Prerequisites
+
+Any modern desktop browser (Chrome, Brave, Edge, Firefox) with **Developer Tools** enabled.
+
+---
+
+## 🚀 Getting Started
+
+1. Open your **YouTube Watch History** page or **Google My Activity**.
+2. Open your browser's **Developer Tools** (`F12` or `Ctrl+Shift+I` / `Cmd+Option+I`).
+3. Navigate to the **Console** tab.
+4. Paste the script and press `Enter`.
+5. Your data will be exported line-by-line into an `.ndjson` (`.jsonl`) file automatically!
+
+---
+
+## 📦 Output Format
+
+The data is saved in **NDJSON** (Newline Delimited JSON), making it lightweight and easy to parse or stream into big data tools:
 
 ```json
-{
-  "id": "ahw_tVTtG84",
-  "url": "[https://www.youtube.com/watch?v=ahw_tVTtG84](https://www.youtube.com/watch?v=ahw_tVTtG84)",
-  "title": "Video Title Example",
-  "date_raw": "20260816",
-  "extracted_at": "2026-08-17T13:28:20.000Z"
-}
+{"id": "video_id_1", "title": "Video Title", "timestamp": "2026-08-17T00:00:00Z"}
+{"id": "video_id_2", "title": "Another Video", "timestamp": "2026-08-17T01:00:00Z"}
